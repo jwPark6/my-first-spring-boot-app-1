@@ -22,7 +22,7 @@ public class DogController {
 
     @GetMapping("/dogs")
     public List<Dog> getAllDogs(){
-        return dogManagementService.getDogs();
+        return dogManagementService.getAllDog();
     }
 
     // RequestParam -> localhost:8001/dogs?name=ian
@@ -32,4 +32,10 @@ public class DogController {
     public Dog getDogByName(@PathVariable String name) {
         return dogManagementService.getDogByName(name);
     }
+
+    @DeleteMapping("/dogs")
+    public void deleteDogByName(@RequestBody Dog dog){
+        dogManagementService.deleteDogByName(dog);
+    }
+
 }

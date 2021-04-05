@@ -2,6 +2,9 @@ package org.cnu.realcoding.service;
 
 import lombok.Getter;
 import org.cnu.realcoding.domain.Dog;
+import org.cnu.realcoding.exception.DogNotFoundException;
+import org.cnu.realcoding.repository.DogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,20 +12,41 @@ import java.util.List;
 
 @Service
 public class DogManagementService {
-    @Getter
-    private List<Dog> dogs = new ArrayList<>();
+    @Autowired
+    private DogRepository dogRepository;
 
     public void insertDog(Dog dog) {
-        dogs.add(dog);
+        if(!dogRepository.existDogByName(dog.getName()) && !dogRepository.existDogByOwnerName(dog.getOwnerName())
+                && !dogRepository.existDogByOwnerPhoneNumber(dog.getOwnerPhoneNumber())){
+            dogRepository.insertDog(dog);
+        }
+        else {
+            throw new DogNotFoundException();
+        }
+
+
     }
 
+
     public Dog getDogByName(String name) {
-        for (Dog dog : dogs) {
-            if (dog.getName().equals(name)) {
-                return dog;
-            }
+        Dog dog = dogRepository.findDog(name);
+
+        if(dog == null){
+            throw new DogNotFoundException();
         }
-        return null;
+
+        return dog;
+    }
+
+    public List<Dog> getAllDog(){
+        return dogRepository.findAllDog(Dog.class);
+    }
+
+    public void deleteDogByName(Dog dog) {
+        if(dogRepository.existDogByName(dog.getName())){
+            dogRepository.deleteDog(dog);
+        }
+
     }
 
 //     throw new DogNotFoundException();
