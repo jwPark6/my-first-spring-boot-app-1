@@ -1,8 +1,11 @@
 package org.cnu.realcoding.controller;
 
+import lombok.Getter;
 import org.cnu.realcoding.domain.Dog;
 import org.cnu.realcoding.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +30,24 @@ public class DogController {
 
     // RequestParam -> localhost:8001/dogs?name=ian
     // PathVariable -> localhost:8001/
-    @ResponseStatus
     @GetMapping("/dogs/{name}")
-    public Dog getDogByName(@PathVariable String name) {
+    public Dog getDogByName(@RequestParam("name") String name) {
         return dogManagementService.getDogByName(name);
     }
 
     @DeleteMapping("/dogs")
     public void deleteDogByName(@RequestBody Dog dog){
         dogManagementService.deleteDogByName(dog);
+    }
+
+    @GetMapping("/dogs/{ownername}")
+    public Dog getDogByOwnername(@RequestParam("ownername") String ownername){
+        return dogManagementService.getDogByOwnerName(ownername);
+    }
+
+    @GetMapping("/dogs/{ownerPhoneNumber}")
+    public Dog getDogByOwnerPhoneNumber(@RequestParam("ownerPhoneNumber") String ownerPhoneNumber){
+        return dogManagementService.getDogByOwnerPhoneNumber(ownerPhoneNumber);
     }
 
 }
