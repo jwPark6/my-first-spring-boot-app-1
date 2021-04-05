@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.service;
+package org.cnu.realcoding.service;
 
 import lombok.Getter;
 import org.cnu.realcoding.domain.Dog;

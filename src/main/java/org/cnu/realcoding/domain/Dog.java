@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.domain;
+package org.cnu.realcoding.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.YOUR_PACKAGE_LOCATION;
+package org.cnu.realcoding.YOUR_PACKAGE_LOCATION;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

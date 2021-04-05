@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.service;
+package org.cnu.realcoding.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableAsync;

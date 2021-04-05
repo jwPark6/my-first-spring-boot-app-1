@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.controller;
+package org.cnu.realcoding.controller;
 
 import org.cnu.realcoding.domain.Dog;
 import org.cnu.realcoding.service.DogManagementService;

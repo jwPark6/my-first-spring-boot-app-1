@@ -1,4 +1,4 @@
-package org.cnu.realcoding.realcoding.repository;
+package org.cnu.realcoding.repository;
 
 import org.cnu.realcoding.domain.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
