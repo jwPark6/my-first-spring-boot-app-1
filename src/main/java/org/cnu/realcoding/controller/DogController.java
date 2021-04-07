@@ -40,9 +40,9 @@ public class DogController {
         dogManagementService.deleteDogByName(dog);
     }
 
-    @PutMapping("/dogs/{name}")
-    public void updateDogAll(@PathVariable String name, @RequestBody Dog dog) {
-        dogManagementService.updateDogAll(name, dog);
+
+    public void updateDogAll(@PathVariable String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber) {
+        dogManagementService.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
     @GetMapping("/dogs/{ownername}")
@@ -54,6 +54,7 @@ public class DogController {
     public Dog getDogByOwnerPhoneNumber(@RequestParam("ownerPhoneNumber") String ownerPhoneNumber){
         return dogManagementService.getDogByOwnerPhoneNumber(ownerPhoneNumber);
     }
+
 
     @GetMapping("/dogs/")
     public Dog getDog(@RequestParam("name") String name,@RequestParam("ownerName") String ownerName,

@@ -78,15 +78,14 @@ public class DogRepository {
                 );
     }
 
-    public void updateDogAll(String name, Dog newDog){
+    public void updateDogAll(String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber){
         Update update = new Update();
-        update.set("name", newDog.getName());
-        update.set("ownerName", newDog.getOwnerName());
-        update.set("ownerPhoneNumber", newDog.getOwnerPhoneNumber());
-        update.set("kind", newDog.getKind());
-
+        update.set("name", newName);
+        update.set("ownerName", newOwnerName);
+        update.set("ownerPhoneNumber", newOwnerPhoneNumber);
+        update.set("kind", newKind);
         mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(name)),
-                        update, "dog");
+                update, "dog");
     }
 
     public Dog findEqualDog(String name, String ownerName, String ownerPhoneNumber) {
