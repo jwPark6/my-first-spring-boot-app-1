@@ -26,13 +26,7 @@ public class DogManagementService {
     }
 
     public Dog getDogByName(String name) {
-        Dog dog = dogRepository.findDog(name);
-
-        if(dog == null){
-            throw new DogNotFoundException();
-        }
-
-        return dog;
+        return dogRepository.findDog(name);
     }
 
     public List<Dog> getAllDog(){
@@ -44,16 +38,21 @@ public class DogManagementService {
             dogRepository.deleteDog(dog);
         }
     }
-
+  
     public void updateDogAll(String name, Dog newDog){
        dogRepository.updateDogAll(name, newDog);
+
+
+    public Dog getDogByOwnerName(String name) {
+        Dog dog = dogRepository.findDogOwner(name);
+
+        return dog;
+
     }
 
-//     throw new DogNotFoundException();
-//        Dog dog = dogRepository.findDog(name);
-//        if (dog == null)
-//            throw new DogNotFoundException();
-//        return dog;
-//}
+    public Dog getDogByOwnerPhoneNumber(String ownerPhoneNumber) {
+        Dog dog = dogRepository.findDogPhoneNumber(ownerPhoneNumber);
 
+        return dog;
+    }
 }

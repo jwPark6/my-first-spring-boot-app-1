@@ -29,9 +29,6 @@ public class DogRepository {
         mongoTemplate.insert(dog);
     }
 
-
-
-
     public List<Dog> findAllDog(Class<Dog> dogClass) {
         return mongoTemplate.findAll(Dog.class);
     }
@@ -63,7 +60,22 @@ public class DogRepository {
                 .remove(Query.query(Criteria.where("name").is(dog.getName())),
                         Dog.class
                 );
+    }
 
+    public Dog findDogOwner(String ownerName) {
+        return mongoTemplate
+                .findOne(
+                        Query.query(Criteria.where("ownerName").is(ownerName)),
+                        Dog.class
+                );
+    }
+
+    public Dog findDogPhoneNumber(String ownerPhoneNumber) {
+        return mongoTemplate
+                .findOne(
+                        Query.query(Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber)),
+                        Dog.class
+                );
     }
 
     public void updateDogAll(String name, Dog newDog){
