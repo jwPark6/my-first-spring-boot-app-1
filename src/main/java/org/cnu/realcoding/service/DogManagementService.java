@@ -34,6 +34,10 @@ public class DogManagementService {
         return dogRepository.findAllDog(Dog.class);
     }
 
+    public void updateDogAll(String name, Dog newDog) {
+        dogRepository.updateDogAll(name, newDog);
+    }
+
     public void deleteDogByName(Dog dog) {
         if(dogRepository.existDogByName(dog.getName())){
             dogRepository.deleteDog(dog);
@@ -57,5 +61,14 @@ public class DogManagementService {
         Dog dog = dogRepository.findDogPhoneNumber(ownerPhoneNumber);
 
         return dog;
+    }
+
+    public Dog getDog(String name, String ownerName, String ownerPhoneNumber) {
+        if (dogRepository.findEqualDogExists(name,ownerName,ownerPhoneNumber)){
+            return dogRepository.findEqualDog(name, ownerName, ownerPhoneNumber);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
     }
 }

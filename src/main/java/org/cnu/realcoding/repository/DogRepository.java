@@ -87,4 +87,20 @@ public class DogRepository {
         mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(name)),
                 update, "dog");
     }
+
+    public Dog findEqualDog(String name, String ownerName, String ownerPhoneNumber) {
+        return mongoTemplate.
+                findOne(
+                        Query.query(Criteria.where("name").is(name).and("ownerName").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber)),
+                        Dog.class
+                );
+    }
+
+    public boolean findEqualDogExists(String name, String ownerName, String ownerPhoneNumber){
+        return mongoTemplate.
+                exists(
+                        Query.query(Criteria.where("name").is(name).and("ownerName").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber)),
+                        Dog.class
+                );
+    }
 }
