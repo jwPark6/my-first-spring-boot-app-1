@@ -38,4 +38,10 @@ public class DogController {
         dogManagementService.deleteDogByName(dog);
     }
 
+
+    @PutMapping("/dogs/{name}")
+    public void updateDogAll(@PathVariable String name, @RequestBody Dog dog){
+        dogManagementService.updateDogAll(name, dog);
+    }
+
 }

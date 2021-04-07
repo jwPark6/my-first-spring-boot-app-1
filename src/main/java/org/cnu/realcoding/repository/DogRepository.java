@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
@@ -63,5 +64,16 @@ public class DogRepository {
                         Dog.class
                 );
 
+    }
+
+    public void updateDogAll(String name, Dog newDog){
+        Update update = new Update();
+        update.set("name", newDog.getName());
+        update.set("ownerName", newDog.getOwnerName());
+        update.set("ownerPhoneNumber", newDog.getOwnerPhoneNumber());
+        update.set("kind", newDog.getKind());
+
+        mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(name)),
+                        update, "dog");
     }
 }

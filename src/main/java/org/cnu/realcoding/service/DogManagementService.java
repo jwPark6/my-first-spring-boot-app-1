@@ -23,10 +23,7 @@ public class DogManagementService {
         else {
             throw new DogNotFoundException();
         }
-
-
     }
-
 
     public Dog getDogByName(String name) {
         Dog dog = dogRepository.findDog(name);
@@ -46,7 +43,10 @@ public class DogManagementService {
         if(dogRepository.existDogByName(dog.getName())){
             dogRepository.deleteDog(dog);
         }
+    }
 
+    public void updateDogAll(String name, Dog newDog){
+       dogRepository.updateDogAll(name, newDog);
     }
 
 //     throw new DogNotFoundException();
