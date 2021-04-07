@@ -2,6 +2,7 @@ package org.cnu.realcoding.service;
 
 import lombok.Getter;
 import org.cnu.realcoding.domain.Dog;
+import org.cnu.realcoding.exception.DogFoundException;
 import org.cnu.realcoding.exception.DogNotFoundException;
 import org.cnu.realcoding.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class DogManagementService {
             dogRepository.insertDog(dog);
         }
         else {
-            throw new DogNotFoundException();
+            throw new DogFoundException();
         }
     }
 
@@ -36,6 +37,9 @@ public class DogManagementService {
     public void deleteDogByName(Dog dog) {
         if(dogRepository.existDogByName(dog.getName())){
             dogRepository.deleteDog(dog);
+        }
+        else{
+            throw new DogNotFoundException();
         }
     }
   
