@@ -46,7 +46,7 @@ public class DogController {
     }
 
     @PatchMapping("/dogs/{name1}")
-    public void updateKind(@PathVariable String name1, String newKind){
+    public void updateKind(String name1, String newKind){
         dogManagementService.updateKind(name1, newKind);
     }
 
