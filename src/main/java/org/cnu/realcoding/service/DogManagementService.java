@@ -26,16 +26,30 @@ public class DogManagementService {
         }
     }
 
-    public Dog getDogByName(String name) {
-        return dogRepository.findDog(name);
-    }
-
     public List<Dog> getAllDog(){
         return dogRepository.findAllDog(Dog.class);
     }
 
+    public void deleteDogByName(Dog dog) {
+        if(dogRepository.existDogByName(dog.getName())){
+            dogRepository.deleteDog(dog);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
+    }
+  
     public void updateDogAll(String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber) {
-        dogRepository.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
+        if (!dogRepository.existDogByName(name)){   // name이 존재하지 않을 경우 DogNotFoundException error
+            throw new DogNotFoundException();
+        }
+        else if (dogRepository.existDogByName(newName) || dogRepository.existDogByOwnerName(newOwnerName)
+        || dogRepository.existDogByOwnerPhoneNumber(newOwnerPhoneNumber)) {   //
+            throw new DogFoundException();
+        }
+        else{
+            dogRepository.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
+        }
     }
 
     public void updateKind(String name, String newKind){
@@ -55,30 +69,36 @@ public class DogManagementService {
             throw new DogNotFoundException();
         }
     }
-
-    public void deleteDogByName(Dog dog) {
-        if(dogRepository.existDogByName(dog.getName())){
-            dogRepository.deleteDog(dog);
+  
+    public Dog getDogByName(String name) {
+        if (dogRepository.existDogByName(name)){
+            return dogRepository.findDog(name);
         }
         else{
             throw new DogNotFoundException();
         }
     }
 
-    public Dog getDogByOwnerName(String name) {
-        Dog dog = dogRepository.findDogOwner(name);
-
-        return dog;
+    public Dog getDogByOwnerName(String ownerName) {
+        if (dogRepository.existDogByOwnerName(ownerName)){
+            return dogRepository.findDogOwner(ownerName);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
     }
 
     public Dog getDogByOwnerPhoneNumber(String ownerPhoneNumber) {
-        Dog dog = dogRepository.findDogPhoneNumber(ownerPhoneNumber);
-
-        return dog;
+        if (dogRepository.existDogByOwnerPhoneNumber(ownerPhoneNumber)){
+            return dogRepository.findDogPhoneNumber(ownerPhoneNumber);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
     }
 
     public Dog getDog(String name, String ownerName, String ownerPhoneNumber) {
-        if (dogRepository.findEqualDogExists(name,ownerName,ownerPhoneNumber)){
+        if (dogRepository.findEqualDogExists(name, ownerName, ownerPhoneNumber)){
             return dogRepository.findEqualDog(name, ownerName, ownerPhoneNumber);
         }
         else{
