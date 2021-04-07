@@ -88,6 +88,26 @@ public class DogRepository {
                 update, "dog");
     }
 
+    public void updateKind(String name, String newKind){
+        Update update = new Update();
+        update.set("kind", newKind);
+
+        mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(name)),
+                update, "dog");
+    }
+
+    public void updateMedicalRecords(String name, String newMedicalRecords){
+        List oldMedicalRecords = findDog(name).getMedicalRecords();
+        oldMedicalRecords.add(newMedicalRecords);
+
+        Update update = new Update();
+        update.set("medicalRecords", oldMedicalRecords);
+
+        mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(name)),
+                update, "dog");
+
+    }
+
     public Dog findEqualDog(String name, String ownerName, String ownerPhoneNumber) {
         return mongoTemplate.
                 findOne(
