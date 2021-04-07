@@ -38,6 +38,24 @@ public class DogManagementService {
         dogRepository.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
+    public void updateKind(String name, String newKind){
+        if(dogRepository.existDogByName(name)){
+            dogRepository.updateKind(name, newKind);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
+    }
+
+    public void updateMedicalRecords(String name, String newMedicalRecords){
+        if(dogRepository.existDogByName(name)){
+            dogRepository.updateMedicalRecords(name, newMedicalRecords);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
+    }
+
     public void deleteDogByName(Dog dog) {
         if(dogRepository.existDogByName(dog.getName())){
             dogRepository.deleteDog(dog);
