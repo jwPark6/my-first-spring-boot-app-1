@@ -25,7 +25,6 @@ public class DogManagementService {
         }
     }
 
-
     public Dog getDogByName(String name) {
         return dogRepository.findDog(name);
     }
@@ -39,11 +38,16 @@ public class DogManagementService {
             dogRepository.deleteDog(dog);
         }
     }
+  
+    public void updateDogAll(String name, Dog newDog){
+       dogRepository.updateDogAll(name, newDog);
+
 
     public Dog getDogByOwnerName(String name) {
         Dog dog = dogRepository.findDogOwner(name);
 
         return dog;
+
     }
 
     public Dog getDogByOwnerPhoneNumber(String ownerPhoneNumber) {
