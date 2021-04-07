@@ -38,7 +38,7 @@ public class DogManagementService {
             throw new DogNotFoundException();
         }
     }
-
+  
     public void updateDogAll(String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber) {
         if (!dogRepository.existDogByName(name)){   // name이 존재하지 않을 경우 DogNotFoundException error
             throw new DogNotFoundException();
@@ -52,6 +52,24 @@ public class DogManagementService {
         }
     }
 
+    public void updateKind(String name, String newKind){
+        if(dogRepository.existDogByName(name)){
+            dogRepository.updateKind(name, newKind);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
+    }
+
+    public void updateMedicalRecords(String name, String newMedicalRecords){
+        if(dogRepository.existDogByName(name)){
+            dogRepository.updateMedicalRecords(name, newMedicalRecords);
+        }
+        else{
+            throw new DogNotFoundException();
+        }
+    }
+  
     public Dog getDogByName(String name) {
         if (dogRepository.existDogByName(name)){
             return dogRepository.findDog(name);
