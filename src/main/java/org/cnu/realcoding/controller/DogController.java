@@ -40,7 +40,7 @@ public class DogController {
         dogManagementService.deleteDogByName(dog);
     }
 
-
+    @PutMapping("/dogs/{name}")
     public void updateDogAll(@PathVariable String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber) {
         dogManagementService.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
