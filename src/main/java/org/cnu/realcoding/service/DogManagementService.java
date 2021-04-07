@@ -43,8 +43,8 @@ public class DogManagementService {
         }
     }
   
-    public void updateDogAll(String name, Dog newDog) {
-        dogRepository.updateDogAll(name, newDog);
+    public void updateDogAll(String name, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber) {
+        dogRepository.updateDogAll(name, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
     public Dog getDogByOwnerName(String name) {
